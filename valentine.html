@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #1a001f, #3a002f, #7a003c);
+        color: white;
+        text-align: center;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px 20px;
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        margin-bottom: 40px;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        padding: 30px 20px;
+        transition: 0.4s;
+        border: 1px solid rgba(255,255,255,0.15);
+        position: relative;
+    }
+
+    .card:hover {
+        transform: translateY(-10px) scale(1.02);
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    .price {
+        font-size: 0.9rem;
+        opacity: 0.7;
+        margin-bottom: 5px;
+    }
+
+    .venue {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+
+    .desc {
+        font-size: 0.95rem;
+        opacity: 0.85;
+        margin-bottom: 20px;
+    }
+
+    button {
+        background: linear-gradient(45deg, #ff4e7a, #ff7eb3);
+        border: none;
+        color: white;
+        padding: 12px 22px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+    }
+
+    .footer {
+        margin-top: 50px;
+        opacity: 0.7;
+        font-size: 0.9rem;
+    }
+
+    .hidden-message {
+        margin-top: 30px;
+        font-size: 1.2rem;
+        font-family: 'Playfair Display', serif;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Be My Valentine</h1>
+    <div class="subtitle">
+        Same date. Same person.  
+        Three completely different experiences.  
+        The choice is yours.
+    </div>
+
+    <div class="cards">
+
+        <!-- Cheap option -->
+        <div class="card">
+            <div class="price">Budget Pick</div>
+            <div class="venue">Street Food Night</div>
+            <div class="desc">
+                Hawker stalls, late-night walks,  
+                and the kind of laughter that costs nothing.
+            </div>
+            <button onclick="choose('Street Food Night')">I choose this</button>
+        </div>
+
+        <!-- Mid option -->
+        <div class="card">
+            <div class="price">Mid-Tier Experience</div>
+            <div class="venue">Rooftop Dinner</div>
+            <div class="desc">
+                City lights, warm breeze,  
+                and a proper dinner with a view.
+            </div>
+            <button onclick="choose('Rooftop Dinner')">I choose this</button>
+        </div>
+
+        <!-- Luxury option -->
+        <div class="card">
+            <div class="price">Luxury Pick</div>
+            <div class="venue">Private Fine Dining</div>
+            <div class="desc">
+                Candlelight, elegant plates,  
+                and a night that feels like a movie scene.
+            </div>
+            <button onclick="choose('Private Fine Dining')">I choose this</button>
+        </div>
+
+    </div>
+
+    <div id="message" class="hidden-message"></div>
+
+    <div class="footer">
+        February 14 • With [Your Name]
+    </div>
+</div>
+
+<script>
+function choose(option) {
+    const msg = document.getElementById("message");
+    msg.style.display = "block";
+    msg.innerHTML = "Perfect choice. Our Valentine’s date will be: <br><strong>" + option + "</strong><br><br>I’ll handle the rest.";
+}
+</script>
+
+</body>
+</html>
