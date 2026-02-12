@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose:    #e8426a;
+    --blush:   #f7a8bc;
+    --deep:    #120008;
+    --surface: rgba(255,255,255,0.06);
+    --border:  rgba(255,255,255,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--deep);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Animated background ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%,  #4a0022 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 80%,  #3b0035 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 50% 40%,  #1e0012 0%, transparent 70%);
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blush);
+    opacity: 0.8;
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--blush);
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    font-weight: 300;
+    opacity: 0.65;
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 240px;
+    margin: 28px auto 0;
+    opacity: 0.35;
+  }
+  .divider span { flex: 1; height: 1px; background: var(--blush); }
+  .divider::before { content: '♥'; font-size: 0.7rem; color: var(--blush); }
+
+  /* ── Flip card ── */
+  .fact-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 48px;
+    animation: fadeUp 0.9s 0.15s ease both;
+  }
+
+  .flip-card {
+    width: 340px;
+    height: 130px;
+    perspective: 1200px;
+    cursor: pointer;
+  }
+
+  .flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+  }
+
+  .flip-card.flipped .flip-inner {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+  }
+
+  .flip-front,
+  .flip-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 26px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    text-align: center;
+    /* NO backdrop-filter here — it breaks 3D transforms */
+  }
+
+  .flip-back {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--blush);
+  }
+
+  .flip-front .tap-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-top: 8px;
+  }
+
+  .flip-front .heart-icon {
+    font-size: 1.4rem;
+    color: var(--rose);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.18); }
+  }
+
+  /* ── Cards grid ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 24px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.25s; }
+  .card:nth-child(2) { animation-delay: 0.38s; }
+  .card:nth-child(3) { animation-delay: 0.51s; }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,66,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    transition: opacity 0.35s;
+    opacity: 0;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(247,168,188,0.3);
+    box-shadow: 0 20px 60px rgba(232,66,106,0.15);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .rating {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blush);
+    opacity: 0.7;
+    margin-bottom: 16px;
+  }
+
+  .card-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.75;
+    opacity: 0.9;
+    margin-bottom: 28px;
+    min-height: 90px;
+  }
+
+  .choose-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(232,66,106,0.5);
+    color: var(--blush);
+    padding: 10px 22px;
+    border-radius: 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, color 0.3s, transform 0.2s;
+  }
+
+  .choose-btn:hover {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: #fff;
+    transform: scale(1.04);
+  }
+
+  .choose-btn::after { content: '→'; }
+
+  /* ── Response message ── */
+  #message {
+    display: none;
+    text-align: center;
+    margin: 0 auto 48px;
+    max-width: 480px;
+    background: var(--surface);
+    border: 1px solid rgba(247,168,188,0.25);
+    border-radius: 20px;
+    padding: 32px 28px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  #message .confirm-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blush);
+    opacity: 0.6;
+    margin-bottom: 12px;
+  }
+
+  #message .confirm-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  #message .confirm-sub {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    opacity: 0.5;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.3;
+    margin-top: 16px;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header">
+    <p class="eyebrow">February 14 &nbsp;·&nbsp; An Invitation</p>
+    <h1>Be My <em>Valentine</em></h1>
+    <p class="subtitle">Same date. Same person.<br>Three completely different experiences at three drastically different prices.<br>The choice is yours.</p>
+    <div class="divider"><span></span><span></span></div>
+  </header>
+
+  <!-- Flip card -->
+  <div class="fact-section">
+    <div class="flip-card" onclick="flipCard(this)">
+      <div class="flip-inner">
+
+        <div class="flip-front">
+          <span class="heart-icon">♥</span>
+          <span class="tap-label">Tap for a Valentine fact</span>
+        </div>
+
+        <div class="flip-back">
+          <strong>Valentine Fact</strong><br><br>
+          Roses are red, violets are blue,<br>
+          and everything is 30% more expensive<br>
+          on February 14.
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Option cards -->
+  <div class="cards">
+
+    <div class="card">
+      <div class="rating">★ 4.6 &nbsp;·&nbsp; 132 reviews</div>
+      <p class="card-desc">
+        Fire-seared and dangerously tender,
+        crisp at first touch,
+        then surrendering slowly as warmth spills and lingers on your tongue.
+      </p>
+      <button class="choose-btn" onclick="choose('Option 1')">I choose this</button>
+    </div>
+
+    <div class="card">
+      <div class="rating">★ 4.8 &nbsp;·&nbsp; 334 reviews</div>
+      <p class="card-desc">
+        A sleek, gold-toned hideout in the heart of the city —
+        bold cocktails, modern bites,
+        and a night that feels effortlessly stylish.
+      </p>
+      <button class="choose-btn" onclick="choose('Option 2')">I choose this</button>
+    </div>
+
+    <div class="card">
+      <div class="rating">★ 4.7 &nbsp;·&nbsp; 2.2k reviews</div>
+      <p class="card-desc">
+        A lively Spanish-style grill,
+        open flames, rich aromas,
+        and plates meant to be shared between laughter.
+      </p>
+      <button class="choose-btn" onclick="choose('Option 3')">I choose this</button>
+    </div>
+
+  </div>
+
+  <!-- Confirmation message -->
+  <div id="message">
+    <p class="confirm-label">You chose</p>
+    <p class="confirm-text" id="confirm-text"></p>
+    <p class="confirm-sub">I'll handle everything else. ♥</p>
+  </div>
+
+  <footer class="footer">February 14 &nbsp;·&nbsp; With Yu Xuan BB</footer>
+
+</div>
+
+<script>
+  function choose(option) {
+    const box  = document.getElementById('message');
+    const text = document.getElementById('confirm-text');
+    text.textContent = option;
+    box.style.display = 'block';
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function flipCard(card) {
+    card.classList.toggle('flipped');
+  }
+</script>
+
+</body>
+</html>
