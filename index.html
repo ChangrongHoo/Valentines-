@@ -99,6 +99,56 @@
         font-family: 'Playfair Display', serif;
         display: none;
     }
+
+    .fact-section {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.flip-card {
+    width: 320px;
+    height: 160px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 1rem;
+}
+
+.flip-back {
+    transform: rotateY(180deg);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
 </style>
 </head>
 <body>
@@ -178,7 +228,13 @@ function choose(option) {
     msg.style.display = "block";
     msg.innerHTML = "Perfect choice. Our Valentine’s date will be: <br><strong>" + option + "</strong><br><br>I’ll handle the rest.";
 }
+
+function flipCard(card) {
+    card.classList.toggle("flipped");
+}
+
 </script>
+    
 
 </body>
 </html>
