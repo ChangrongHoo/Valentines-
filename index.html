@@ -107,51 +107,68 @@
     <h1>Be My Valentine</h1>
     <div class="subtitle">
         Same date. Same person.  
-        Three completely different experiences.  
+        Three completely different experiences at three drastically different price.  
         The choice is yours.
     </div>
+
+    <div class="fact-section">
+    <div class="flip-card" onclick="flipCard(this)">
+        <div class="flip-inner">
+            <div class="flip-front">
+                Tap for a Valentine fact
+            </div>
+            <div class="flip-back">
+                Valentine Fact:<br>
+                Roses are red, violets are blue,<br>
+                and everything is 30% more expensive on February 14.
+            </div>
+        </div>
+    </div>
+</div>
 
     <div class="cards">
 
         <!-- Cheap option -->
         <div class="card">
-            <div class="price">Google Review 4.7 (2.2k)</div>
-            <div class="venue">Mediterranean</div>
-            <div class="desc">
-                Hidden fire, crafted feast, warm embrace.
+    <div class="price">Google Review 4.6 (132)</div>
+    <div class="desc">
+    Fire-seared and dangerously tender,  
+    crisp at first touch,  
+    then surrendering slowly as warmth spills and lingers on your tongue.
+    </div>
+    <button onclick="choose('Option 1')">I choose this</button>
+</div>
 
-            </div>
-            <button onclick="choose('Street Food Night')">I choose this</button>
-        </div>
 
         <!-- Mid option -->
         <div class="card">
-            <div class="price">Google Review 4.6 (132)</div>
-            <div class="venue"></div>
-            <div class="desc">
-                City lights, warm breeze,  
-                and a proper dinner with a view.
-            </div>
-            <button onclick="choose('Rooftop Dinner')">I choose this</button>
-        </div>
+    <div class="price">Google Review 4.8 (334)</div>
+    <div class="desc">
+        A sleek, gold-toned hideout in the heart of the city,  
+        bold cocktails, modern bites,  
+        and a night that feels effortlessly stylish.
+    </div>
+    <button onclick="choose('Option 2')">I choose this</button>
+</div>
 
         <!-- Luxury option -->
-        <div class="card">
-            <div class="price">Luxury Pick</div>
-            <div class="venue">Private Fine Dining</div>
-            <div class="desc">
-                Candlelight, elegant plates,  
-                and a night that feels like a movie scene.
-            </div>
-            <button onclick="choose('Private Fine Dining')">I choose this</button>
-        </div>
+  <div class="card">
+    <div class="price">Google Review 4.7 (2.2k)</div>
+    <div class="desc">
+        A lively Spanish-style grill,  
+        open flames, rich aromas,  
+        and plates meant to be shared between laughter.
+    </div>
+    <button onclick="choose('Option 3')">I choose this</button>
+</div>
+
 
     </div>
 
     <div id="message" class="hidden-message"></div>
 
     <div class="footer">
-        February 14 • With [Your Name]
+        February 14 • With Yu Xuan BB
     </div>
 </div>
 
